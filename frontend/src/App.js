@@ -5,9 +5,9 @@ function App() {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/readevent/')
+        axios.get('http://127.0.0.1:8000/api/Events/')
             .then(response => {
-                setMessage(response.data.message);
+                setMessage(response.data[1].EventName);
             })
             .catch(error => {
                 console.error("There was an error!", error);
