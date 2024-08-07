@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import CreateEvent from './Events/Create';
+import UpdateEvent from './Events/Update';
+import DeleteEvent from './Events/Delete';
+import ReadEvent from './Events/Read';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ReadEvent />
   </React.StrictMode>
 );
 
