@@ -1,0 +1,67 @@
+/* ----------------- ROOT ------------------- */
+
+:root{
+    --Primary:red;
+    --Secondary:blue;
+    --Minimal:yellow;
+    --White:white;
+    --Black:black;
+    --Font:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+/* ---------------- NAVBAR ------------------ */
+
+.Nav{
+    background-color: var(--Primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color:var(--Black);
+    padding: 0px 30px;
+    font-family: var(--Font);
+}
+.Nav-Title{
+    cursor: pointer;
+}
+.Nav-Elements{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Nav-Elements a{
+    padding: 0px 10px;
+    color: var(--Black);
+    font-family: var(--Font);
+    text-decoration: none;
+    cursor: pointer;
+}
+.Nav-Elements a:hover{
+    color: var(--Minimal);
+}
+.Nav-Login a{
+    background-color: var(--Secondary);
+    text-decoration: none;
+    color: var(--White);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ---------------- FOOTER ---------------------- */
+
+.Footer-Text p{
+    color: var(--Black);
+    font:var(--Font);
+}
+.Footer-Text{
+    background-color: var(--Primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:fixed;
+    z-index: 5;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
