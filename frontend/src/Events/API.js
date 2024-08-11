@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:8000/api/Event/';  // Replace with your actual API URL
+const API_URL = 'http://127.0.0.1:8000/Event/';  // Replace with your actual API URL
 
 // Create
 export const createEventAPI = async (data) => {

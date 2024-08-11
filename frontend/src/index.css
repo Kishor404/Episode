@@ -1,3 +1,14 @@
+/* ----------------- ROOT ------------------- */
+
+:root{
+  --Primary:red;
+  --Secondary:blue;
+  --Minimal:yellow;
+  --White:white;
+  --Black:black;
+  --Font:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
