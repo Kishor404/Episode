@@ -1,11 +1,22 @@
 import Cookies from 'js-cookie';
 import { useState } from 'react';
+import { createEventAPI } from './API';
 
 function CreateEvent() {
 
     Cookies.set("Org","Org1");
 
     let Organization=Cookies.get("Org")
+
+    const Post_Event=async(data)=>{
+        try {
+            await createEventAPI(data);
+            alert('Event created successfully!');
+        } catch (error) {
+            console.error(error);
+            alert('Failed to create item');
+        }
+    }
 
     const [name, setName] = useState('None');
     const [venue, setVenue] = useState('None');
@@ -122,7 +133,7 @@ function CreateEvent() {
     const CreateEve=()=>{
         Event.Status=1
         console.log(Event)
-        Cookies.set("Event",Event)
+        Post_Event(Event)
     }
 
     return (
