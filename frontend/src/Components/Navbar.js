@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import "./Components.css"
+import Cookies from 'js-cookie';
 
 const Navbar=()=>{
+    const LogName=Cookies.get("Name");
     return(
         <>
         <div className="Nav">
@@ -15,7 +17,7 @@ const Navbar=()=>{
                 
             </div>
             <div className="Nav-Login">
-                <Link to={"/Log"}>Login</Link>
+                <Link to={"/Log"}>{LogName || "Login"}</Link>
             </div>
         </div>
         </>

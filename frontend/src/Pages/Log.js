@@ -1,23 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './Style/Log.css';
-import { createLogAPI, getLogs } from './LogAPI';
+import { createLogAPI, checkLogAPI } from './LogAPI';
+import Cookies from 'js-cookie';
 
 const Log = () => {
-    const [logs, setLogs] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await getLogs();
-                setLogs(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
+    const LogRegNo = Cookies.get('RegNo');
+    const LogYear = Cookies.get('Year');
+    const LogDept = Cookies.get('Dept');
+    const LogName = Cookies.get('Name');
+    const LogPos = Cookies.get('Position');
+    const isLogged = Cookies.get('Log') === 'true'; // Check if the user is logged in
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -50,6 +43,7 @@ const Log = () => {
         }
     };
 
+
     const postLog = async (data) => {
         try {
             await createLogAPI(data);
@@ -57,6 +51,36 @@ const Log = () => {
         } catch (error) {
             console.error(error);
             alert('Failed to create item');
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    const AuthLog = async (data) => {
+        try {
+            setIsLoading(true);
+            const autho = await checkLogAPI(data);
+            console.log(autho.data.check);
+            if (autho) {
+                if (autho.data.check === 1) {
+                    Cookies.set('Log', 'true', { expires: 7 });
+                    Cookies.set('Name', autho.data.Name, { expires: 7 });
+                    Cookies.set('Dept', autho.data.Dept, { expires: 7 });
+                    Cookies.set('Year', autho.data.Year, { expires: 7 });
+                    Cookies.set('RegNo', autho.data.RegNo, { expires: 7 });
+                    Cookies.set('Position', autho.data.Position, { expires: 7 });
+                    window.location.reload();// Reload the page to reflect changes
+                } else if (autho.data.check === 404) {
+                    alert("Invalid Email!");
+                } else if (autho.data.check === 0) {
+                    alert("Password Incorrect");
+                }
+            }
+
+            setIsLoading(false);
+        } catch (error) {
+            console.error(error);
+            alert('Check Internet');
         } finally {
             setIsLoading(false);
         }
@@ -71,16 +95,9 @@ const Log = () => {
             alert("Please use your ritrjpm.ac.in email address.");
             return;
         }
-        extractRegnoFromEmail(email);
-        setIsLoading(true);
-
-        const user = logs.find(log => log.Email === email && log.Password === password);
-        if (user) {
-            alert("Welcome");
-        } else {
-            alert("Invalid email or password.");
-        }
-        setIsLoading(false);
+        
+        const Logx = { "email": email, "password": password };
+        AuthLog(Logx);
     };
 
     const handleSignUp = () => {
@@ -102,78 +119,99 @@ const Log = () => {
         postLog(data);
     };
 
+    const LogOut = () => {
+        Cookies.remove('Log');
+        Cookies.remove('RegNo');
+        Cookies.remove('Year');
+        Cookies.remove('Dept');
+        Cookies.remove('Name');
+        Cookies.remove('Position');
+        window.location.reload(); // Reload the page after logging out
+    }
+
     return (
         <div>
             <div className='Log-Cont'>
-                {isLoggingIn ? (
-                    <div className='Login'>
-                        <input
-                            placeholder="College Email Id"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                        <input
-                            placeholder="Password"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                        <button
-                            onClick={handleLogin}
-                            className='Login-Button'
-                            disabled={isLoading}
-                        >
-                            {isLoading ? 'Logging in...' : 'Login'}
-                        </button>
-                        <p>
-                            Don't have an account? 
-                            <button onClick={() => setIsLoggingIn(false)}> Sign Up</button>
-                        </p>
-                    </div>
+                {!isLogged ? (
+                    isLoggingIn ? (
+                        <div className='Login'>
+                            <input
+                                placeholder="College Email Id"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                            <input
+                                placeholder="Password"
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <button
+                                onClick={handleLogin}
+                                className='Login-Button'
+                                disabled={isLoading}
+                            >
+                                {isLoading ? 'Logging in...' : 'Login'}
+                            </button>
+                            <p>
+                                Don't have an account? 
+                                <button onClick={() => setIsLoggingIn(false)}> Sign Up</button>
+                            </p>
+                        </div>
+                    ) : (
+                        <div className='SignUp'>
+                            <input
+                                placeholder="Name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+                            <input
+                                placeholder="College Email Id"
+                                value={email}
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                    extractRegnoFromEmail(e.target.value);
+                                }}
+                                required
+                            />
+                            <input
+                                placeholder="Password"
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <input
+                                placeholder="Confirm Password"
+                                type="password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                            />
+                            <button
+                                onClick={handleSignUp}
+                                className='SignUp-Button'
+                                disabled={isLoading}
+                            >
+                                {isLoading ? 'Signing up...' : 'Sign Up'}
+                            </button>
+                            <p>
+                                Already have an account? 
+                                <button onClick={() => setIsLoggingIn(true)}> Login</button>
+                            </p>
+                        </div>
+                    )
                 ) : (
-                    <div className='SignUp'>
-                        <input
-                            placeholder="Name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                        />
-                        <input
-                            placeholder="College Email Id"
-                            value={email}
-                            onChange={(e) => {
-                                setEmail(e.target.value);
-                                extractRegnoFromEmail(e.target.value);
-                            }}
-                            required
-                        />
-                        <input
-                            placeholder="Password"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                        <input
-                            placeholder="Confirm Password"
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                        />
-                        <button
-                            onClick={handleSignUp}
-                            className='SignUp-Button'
-                            disabled={isLoading}
-                        >
-                            {isLoading ? 'Signing up...' : 'Sign Up'}
-                        </button>
-                        <p>
-                            Already have an account? 
-                            <button onClick={() => setIsLoggingIn(true)}> Login</button>
-                        </p>
+                    <div className='LogID'>
+                        <p>{LogName}</p>
+                        <p>{LogPos}</p>
+                        <p>{LogRegNo}</p>
+                        <p>{LogDept}</p>
+                        <p>{LogYear}</p>
+                        <button onClick={LogOut}>LogOut</button>
                     </div>
                 )}
             </div>

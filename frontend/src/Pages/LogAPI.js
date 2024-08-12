@@ -7,6 +7,10 @@ export const createLogAPI = async (data) => {
     return await axios.post(API_URL, data);
 };
 
+export const checkLogAPI = async (data) => {
+    return await axios.post(API_URL+'checkpassword/', data);
+};
+
 // Read (Get all Logs)
 export const getLogs = async () => {
     return await axios.get(API_URL);
