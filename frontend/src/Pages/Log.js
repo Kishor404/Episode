@@ -17,7 +17,7 @@ const Log = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [name, setName] = useState('');
     const [regno, setRegno] = useState('');
-    const [year, setYear] = useState('');
+    const [year, setYear] = useState(0);
     const [department, setDepartment] = useState('');
     const [isLoggingIn, setIsLoggingIn] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +32,7 @@ const Log = () => {
         setRegno(regno);
 
         if (regno.startsWith("9536")) {
-            const year = regno.slice(4, 6);
+            const year = parseInt(regno.slice(4, 6));
             setYear(year);
 
             const department = regno.slice(6, 9);
@@ -115,7 +115,8 @@ const Log = () => {
         }
         extractRegnoFromEmail(email);
         setIsLoading(true);
-        const data = { Name: name, Email: email, Password: password, RegNo: regno, Year: year, Department: department };
+        const data = { Name: name, Email: email, Password: password,password:password, RegNo: regno, Year: year, Department: department, Position:0};
+        console.log(data)
         postLog(data);
     };
 
