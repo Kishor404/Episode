@@ -115,7 +115,7 @@ const Log = () => {
         }
         extractRegnoFromEmail(email);
         setIsLoading(true);
-        const data = { Name: name, Email: email, Password: password,password:password, RegNo: regno, Year: year, Department: department, Position:0};
+        const data = { Name: name, Email: email, Password: password,password:password, RegNo: regno, Year: year, Department: department};
         console.log(data)
         postLog(data);
     };

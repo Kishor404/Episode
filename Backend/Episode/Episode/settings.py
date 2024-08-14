@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Event',
     'Log',
+    'Association',
     'rest_framework',
     'corsheaders',
 ]

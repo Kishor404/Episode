@@ -1,7 +1,21 @@
 import { getEvents } from './API';
 import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import Roles from "../Roles.json";
+
 
 function ReadEvent(){
+
+    const pos = Cookies.get("Position");
+    const Role = Roles[pos];
+
+    useEffect(() => {
+        if (!Role.includes("RE")) {
+            window.location.href = "/";
+        } else {
+            document.querySelector(".RE").style.display = "block";
+        }
+    }, [Role]);
 
     const [Event, setEvent] = useState([]);
 
@@ -54,13 +68,13 @@ function ReadEvent(){
     return (
         
         <>
-            <div>
+            <div className='RE' style={{ display: "none" }}>
                 <p>Event</p>
                 <div>
                     {Array.from({ length: Event.length }, (_, i) => (
                         <div key={i}>
                             <p>{Event[i].Name}</p>
-                            <p>{Event[i].Venue}</p>
+                            <p>{Event[i].id}</p>
                         </div>
                     ))}
                 </div>
