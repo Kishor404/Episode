@@ -22,6 +22,8 @@ const Log = () => {
     const [isLoggingIn, setIsLoggingIn] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
+    const DeptData={"244":"CSBS"}
+
     const validateEmailDomain = (email) => {
         const domain = '@ritrjpm.ac.in';
         return email.endsWith(domain);
@@ -35,10 +37,10 @@ const Log = () => {
             const year = parseInt(regno.slice(4, 6));
             setYear(year);
 
-            const department = regno.slice(6, 9);
+            const department = DeptData[regno.slice(6, 9)];
             setDepartment(department);
         } else {
-            setYear("None");
+            setYear(0);
             setDepartment("None");
         }
     };

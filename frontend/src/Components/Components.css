@@ -39,6 +39,45 @@
     border-radius: 5px;
     cursor: pointer;
 }
+.Nav-Event-But{
+    position: relative;
+    width: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Nav-Event-Drop{
+    position: absolute;
+    top:4vh;
+    right:0;
+    left: 0;
+    background-color: var(--Secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 130px;
+    border-radius: 5px;
+    z-index: 10;
+}
+.Menu-Link{
+    width: 100%;
+    text-align: center;
+}
+#composition-button{
+    padding: 10px;
+}
+.Nav-Event-Drop a{
+    text-decoration: none;
+    color: var(--White);
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px;
+    border-radius:5px;
+}
+.Nav-Event-Drop a:hover{
+    background-color: var(--Primary);
+}
 
 /* ---------------- FOOTER ---------------------- */
 

@@ -33,3 +33,12 @@ class CheckPasswordView(APIView):
             return Response({"check":1,"detail": "Password is correct.","Name":log_entry.Name,"Dept":log_entry.Department,"Year":log_entry.Year,"RegNo":log_entry.RegNo,"Position":log_entry.Position}, status=status.HTTP_200_OK)
         else:
             return Response({"check":0,"detail": "Password is incorrect."}, status=status.HTTP_200_OK)
+
+class LogDetailByRegNoView(APIView):
+    def get(self, request, regno, *args, **kwargs):
+        try:
+            log_entry = Log.objects.get(RegNo=regno)
+            serializer = LogSerializer(log_entry)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Log.DoesNotExist:
+            return Response({"detail": "Log entry not found."}, status=status.HTTP_404_NOT_FOUND)

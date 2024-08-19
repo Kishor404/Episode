@@ -1,5 +1,17 @@
 {
-    "Student":["VE","FE","W"],
-    "Faculty":["VE","FE","W"],
-    "CoCuricular":["CE","RE","VE","UE","DE","RA"]
+    "Student":["VE","FE","W","P"],
+    "Faculty":["VE","FE","W","P"],
+
+    "Association-P1":["CE","RE","UE","DE","VE","FE","W","P"],
+    "Association-Faculty":["CE","RE","UE","DE","VE","FE","W","P","CA","RA","UA","DA","UP"],
+
+    "HOD":["VE","FE","W","P"],
+    "Principal":["VE","FE","W","P"],
+    "Vice-Principal":["VE","FE","W","P"],
+    "GM":["VE","FE","W","P"],
+
+    "CoCuricular":["CE","RE","UE","DE","VE","FE","W","P","CA","RA","UA","DA","UP"],
+
+    "Poster":["VE","FE","W","P","UP"],
+    "Social":["VE","FE","W","P","UC","UL"]
 }

@@ -8,6 +8,7 @@ class Log(models.Model):
     RegNo = models.CharField(max_length=100, unique=True)  # Ensure RegNo is unique
     Department = models.CharField(max_length=100)
     Year = models.IntegerField()
+    Association=models.CharField(max_length=100,default="None")
     Position = models.CharField(default="Student",max_length=100)
 
     def save(self, *args, **kwargs):

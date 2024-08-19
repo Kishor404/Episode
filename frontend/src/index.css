@@ -1,9 +1,9 @@
 /* ----------------- ROOT ------------------- */
 
 :root{
-  --Primary:red;
-  --Secondary:blue;
-  --Minimal:yellow;
+  --Primary:rgb(33, 200, 230);
+  --Secondary:rgb(11, 136, 115);
+  --Minimal:rgb(55, 0, 255);
   --White:white;
   --Black:black;
   --Font:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
