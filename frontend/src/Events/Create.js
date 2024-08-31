@@ -7,6 +7,8 @@ import "./Event.css"
 import { getAssociations } from '../Association/API';
 import Tooltip from '@mui/material/Tooltip';
 
+import Circular from './Circular';
+
 const CreateEvent=()=>{
 
     // ------------------------- Verify User ---------------------
@@ -330,6 +332,7 @@ const CreateEvent=()=>{
 
     // ----------------- Data Pass For POST --------------
 
+
     const Submit = () => {
         
     
@@ -358,6 +361,8 @@ const CreateEvent=()=>{
         SetFinalParticipations(newFinalParticipations);
 
         console.log(Event);
+        const EData=JSON.stringify(Event)
+        Cookies.set("CZ45",EData)
     };
     
 
@@ -631,7 +636,9 @@ const CreateEvent=()=>{
                 {/* Pre Final */}
 
                 <div className='CE-PCont'>
-                    <p>{JSON.stringify(Event,null,2)}</p>
+                    <div className='CE-ZCont'>
+                        <Circular data={JSON.stringify(Event)}/>
+                    </div>
                 </div>
 
                 <div className='CE-PNav'>
