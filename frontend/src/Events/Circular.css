@@ -44,9 +44,10 @@
     height: 100%;
     border-right: 2px solid black;
     display: flex;
+    flex-direction: column;
     justify-content: start;
     padding-left: 1cm;
-    align-items: center;
+    align-items: start;
 }
 .Circular-Mid-R{
     width: 50%;
@@ -72,4 +73,20 @@
 }
 .Circular-Mid-R th{
     font-weight: bold;
+}
+.Circular-Low{
+    display: flex;
+    width: 100%;
+    padding-top: 1cm;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.Circular-Low div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.Circular-Low div p{
+    margin: 3px;
 }

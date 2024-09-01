@@ -9,6 +9,7 @@ import UpdateEvent from './Events/Update';
 import DeleteEvent from './Events/Delete';
 import ReadEvent from './Events/Read';
 import ViewEvent from './Events/View';
+import Circular from './Events/Circular';
 
 import CreateAssociation from './Association/Create';
 import ReadAssociation from './Association/Read';
@@ -16,6 +17,7 @@ import ReadAssociation from './Association/Read';
 
 import Home from './Pages/Home';
 import Log from './Pages/Log';
+import Requests from './Pages/Requests';
 
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
@@ -35,8 +37,12 @@ root.render(
         <Route path="/Event/Read" element={<ReadEvent />} />
         <Route path="/Event/View" element={<ViewEvent />} />
 
+        <Route path="/Circular" element={<Circular />} />
+
         <Route path="/Association/Create" element={<CreateAssociation />} />
         <Route path="/Association/Read" element={<ReadAssociation />} />
+
+        <Route path="/Requests" element={<Requests />} />
 
         <Route path="/Log" element={<Log />} />
         <Route path="*" element={<h2>404 Page Not Found</h2>} />

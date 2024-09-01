@@ -93,7 +93,7 @@ const CreateEvent=()=>{
     const [FacultyTooltip,SetFacultyTooltip]=useState([["",{}]]);
 
     useEffect(()=>{
-        const FacultyList = LogData.filter(log => log.Position === 'Faculty');
+        const FacultyList = LogData.filter(log => log.Position !== 'Student');
         let Flist=[];
         for(let i=0;i<FacultyList.length;i++){
             Flist.push(FacultyList[i].RegNo)
@@ -106,7 +106,7 @@ const CreateEvent=()=>{
 
     const [Name,SetName]=useState("");
     const [Venue,SetVenue]=useState("");
-    const [Permission,SetPermission]=useState({});
+    const [Permission,SetPermission]=useState({AS:0,AF:0,HOD:0,VP:0,P:0});
     const [Association,SetAssociation]=useState("");
     const [Faculty_Incharge,SetFaculty_Incharge]=useState([""]);
     const [Student_Incharge,SetStudent_Incharge]=useState([""]);
@@ -133,7 +133,7 @@ const CreateEvent=()=>{
             
             for(let j=0;j<LogData.length;j++){
                 if(LogData[j].RegNo===e.target.value){
-                    FT[i][0]=LogData[j].RegNo
+                    FT[i][0]=LogData[j].Name
                     FT[i][1]={backgroundColor:"white",color:"green"}
                     break;
                 }
@@ -249,23 +249,24 @@ const CreateEvent=()=>{
 
     // ------------------- Permission ------------------
 
-    const Permissionsitems=["GM","Principal","Vice Principal","HOD","Association_Faculty","Association_Student"]
-    const [EventPermission, setEventPermission] = useState([]);
-    const handlePermissionChange = (e) => {
-        const { name, checked } = e.target;
-        if (checked) {
-            setEventPermission([...EventPermission, name]);
-        } else {
-            setEventPermission(EventPermission.filter(item => item !== name));
-        }
-    };
-    useEffect(()=>{
-        let TempPermissions=[]
-        for(let i=0;i<EventPermission.length;i++){
-            TempPermissions.push([EventPermission[i],"No"])
-        }
-        SetPermission(TempPermissions)
-    },[EventPermission])
+    // const Permissionsitems=["GM","Principal","Vice Principal","HOD","Association_Faculty","Association_Student"]
+    // const [EventPermission, setEventPermission] = useState();
+    // const handlePermissionChange = (e) => {
+    //     const { name, checked } = e.target;
+    //     if (checked) {
+    //         setEventPermission([...EventPermission, name]);
+    //     } else {
+    //         setEventPermission(EventPermission.filter(item => item !== name));
+    //     }
+    // };
+    // useEffect(()=>{
+    //     let TempPermissions=[]
+    //     for(let i=0;i<EventPermission.length;i++){
+    //         TempPermissions.push([EventPermission[i],"No"])
+    //     }
+    //     SetPermission(TempPermissions)
+    // },[EventPermission])
+
 
     // ------------------- Department ------------------
 
@@ -361,14 +362,13 @@ const CreateEvent=()=>{
         SetFinalParticipations(newFinalParticipations);
 
         console.log(Event);
-        const EData=JSON.stringify(Event)
-        Cookies.set("CZ45",EData)
+        POST_Event(Event);
     };
     
 
     
     // ------------- PAGE HANDLING --------------------
-    const x=7
+    const x=6
     const Open_P1=()=>{
         for(let i=x;i>0;i--){
             let pid=".CE-P"+i;
@@ -410,13 +410,6 @@ const CreateEvent=()=>{
             document.querySelector(pid).style.display="none"
         }
         document.querySelector(".CE-P6").style.display="flex"
-    }
-    const Open_P7=()=>{
-        for(let i=x;i>0;i--){
-            let pid=".CE-P"+i;
-            document.querySelector(pid).style.display="none"
-        }
-        document.querySelector(".CE-P7").style.display="flex"
     }
 
 
@@ -604,8 +597,8 @@ const CreateEvent=()=>{
 
 
 
-            <div className="CE-P6 CE-P" style={{ display: "none" }}>
-                {/* PERMISSION */}
+            {/* <div className="CE-P6 CE-P" style={{ display: "none" }}>
+                
                 <div>
                     <ul>
                         {Permissionsitems.map((item, index) => (
@@ -628,11 +621,11 @@ const CreateEvent=()=>{
                     <button onClick={Open_P5} className='CE-Prev'>Pervious</button>
                     <button onClick={Open_P7}>Next</button>
                 </div>
-            </div>
+            </div> */}
 
 
 
-            <div className="CE-P7 CE-P" style={{ display: "none" }}>
+            <div className="CE-P6 CE-P" style={{ display: "none" }}>
                 {/* Pre Final */}
 
                 <div className='CE-PCont'>

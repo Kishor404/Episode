@@ -18,11 +18,11 @@ const Navbar = () => {
     const Pos = Cookies.get("Position");
     const actions = Roles[Pos];
 
-    const [nav, setNav] = useState([["Home", "/"]]);
+    const [nav, setNav] = useState([["Home", "/"],["Requests","/Requests"]]);
     const [Evenav, setEveNav] = useState([["View", "/Event/View/"]]);
 
     useEffect(() => {
-        setNav([["Home", "/"]])
+        setNav([["Home", "/"],["Requests","/Requests"]])
         setEveNav([["View", "/Event/View/"]])
         if (actions) {
             if (actions.includes("CE")) {

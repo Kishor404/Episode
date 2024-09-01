@@ -19,7 +19,7 @@ export const getEventById = async (id) => {
 
 // Update
 export const updateEvent = async (id, data) => {
-    return await axios.put(`${API_URL}${id}/`, data);
+    return await axios.patch(`${API_URL}${id}/`, data);
 };
 
 // Delete
